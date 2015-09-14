@@ -1,6 +1,6 @@
 var config = {
         plugins: [
-          // "pilot",
+          "pilot",
           // "battery",
           // "video-feed",
           // "flight-recorder",

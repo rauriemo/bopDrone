@@ -1,5 +1,6 @@
 var express = require('express')
   , app = express()
+  , fs = require('fs')
   , path = require('path')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
@@ -27,8 +28,6 @@ var drone_ip = process.env.DEFAULT_DRONE_IP || '192.168.1.1';
 var scripts = []
   , styles = []
   ;
-
-
 
 // sets app ports, view defaults, bower components
 app.configure(function () {
@@ -69,19 +68,6 @@ function navdata_option_mask(c) {
 }
 
 var client = bebop.createClient({timeout:4000});
-client.connect(function() {
-  client.takeOff();
-
-  setTimeout(function() {
-    client.land();
-  }, 1000);
-});
-// console.log(client);
-
-
-// client.config('general:navdata_demo', 'TRUE');
-// client.config('`video:video_channel', '0');
-// client.config('general:navdata_options', navdata_options);
 
 // Add a handler on navdata updates
 var latestNavData;
