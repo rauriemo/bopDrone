@@ -2,7 +2,7 @@ var config = {
         plugins: [
           "pilot",
           // "battery",
-          "video-stream",
+          // "video-stream",
           // "flight-recorder",
           // "HUD"
 
