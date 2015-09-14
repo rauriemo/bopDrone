@@ -111,7 +111,6 @@ PILOT_ACCELERATION = 0.04;
         Pilot.prototype.listen = function listen() {
                 var pilot = this;
                 $(document).keydown(function(ev) {
-                        debugger
                         pilot.keyDown(ev);
                 });
 

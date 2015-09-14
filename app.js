@@ -29,8 +29,6 @@ var scripts = []
   , styles = []
   ;
 
-
-
 // sets app ports, view defaults, bower components
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
@@ -70,19 +68,6 @@ function navdata_option_mask(c) {
 }
 
 var client = bebop.createClient({timeout:4000});
-client.connect(function() {
-  client.takeOff();
-
-  setTimeout(function() {
-    client.land();
-  }, 1000);
-});
-// console.log(client);
-
-
-// client.config('general:navdata_demo', 'TRUE');
-// client.config('`video:video_channel', '0');
-// client.config('general:navdata_options', navdata_options);
 
 // Add a handler on navdata updates
 var latestNavData;

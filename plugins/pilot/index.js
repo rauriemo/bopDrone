@@ -2,6 +2,7 @@ var channel = 0;
 
 function pilot(name, deps) {
     deps.io.sockets.on('connection', function (socket) {
+      console.log("connected to socket")
         socket.on('/pilot/move', function (cmd) {
             var _name;
             console.log("move", cmd);
