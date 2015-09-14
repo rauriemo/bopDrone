@@ -1,5 +1,6 @@
 var express = require('express')
   , app = express()
+  , fs = require('fs')
   , path = require('path')
   , favicon = require('serve-favicon')
   , logger = require('morgan')
