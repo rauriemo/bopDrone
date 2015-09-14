@@ -1,13 +1,11 @@
-var express = require('express');
-  , path = require('path');
-  , favicon = require('serve-favicon');
-  , logger = require('morgan');
-  , cookieParser = require('cookie-parser');
-  , bodyParser = require('body-parser');
-  , routes = require('./routes/index');
-  , users = require('./routes/users');
-  , app = express();
-  , server = require("http").createServer(app),
+var express = require('express')
+  , app = express()
+  , path = require('path')
+  , favicon = require('serve-favicon')
+  , logger = require('morgan')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser')
+  , server = require("http").createServer(app)
   , io = require('socket.io').listen(server)
   , bebop = require('node-bebop')
   , beBopConstants = require('node-bebop/lib/constants')
@@ -29,6 +27,8 @@ var drone_ip = process.env.DEFAULT_DRONE_IP || '192.168.1.1';
 var scripts = []
   , styles = []
   ;
+
+
 
 // sets app ports, view defaults, bower components
 app.configure(function () {
@@ -68,17 +68,19 @@ function navdata_option_mask(c) {
   return 1 << c;
 }
 
-// From the SDK.
-var navdata_options = (
-    navdata_option_mask(arDroneConstants.options.DEMO)
-  | navdata_option_mask(arDroneConstants.options.VISION_DETECT)
-  | navdata_option_mask(arDroneConstants.options.MAGNETO)
-  | navdata_option_mask(arDroneConstants.options.WIFI)
-);
+var client = bebop.createClient({timeout:4000});
+client.connect(function() {
+  client.takeOff();
 
-var drone = new bebop.createClient({timeout:4000});
+  setTimeout(function() {
+    client.land();
+  }, 1000);
+});
+// console.log(client);
+
+
 // client.config('general:navdata_demo', 'TRUE');
-// client.config('video:video_channel', '0');
+// client.config('`video:video_channel', '0');
 // client.config('general:navdata_options', navdata_options);
 
 // Add a handler on navdata updates
@@ -138,6 +140,7 @@ function getFilter(ext) {
         return filename.match(new RegExp('\\.' + ext + '$', 'i'));
     };
 }
+
 
 config.plugins.forEach(function (plugin) {
     console.log("Loading " + plugin + " plugin.");
